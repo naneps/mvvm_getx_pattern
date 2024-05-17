@@ -10,7 +10,7 @@ class BaseProvider extends GetConnect {
     } else if (error is TimeoutException) {
       print('Request timed out.');
     } else {
-      print('An unexpected error occurred: $error');
+      print('An error occurred: $error');
     }
   }
 
