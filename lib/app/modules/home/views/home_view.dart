@@ -21,31 +21,10 @@ class HomeView extends GetView<HomeController> {
       body: Container(
         width: Get.width,
         decoration: const BoxDecoration(),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('home'.tr),
-            Text('about'.tr),
-            Text('contact'.tr),
-            Text('login'.tr),
-            Text('register'.tr),
-            Text('logout'.tr),
-            Text('profile'.tr),
-            ElevatedButton(
-              onPressed: () {
-                Get.updateLocale(const Locale('id', 'ID'));
-              },
-              child: const Text('Switch to Indonesian'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.updateLocale(const Locale('ko', 'KR'));
-                print('home'.tr);
-              },
-              child: const Text('Switch to Korean'),
-            ),
-          ],
+          children: [],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mvvm_getx_pattern/app/commons/theme_manager.dart';
 import 'package:mvvm_getx_pattern/app/routes/app_pages.dart';
 import 'package:mvvm_getx_pattern/app/services/app_translation.dart';
 
@@ -15,6 +16,7 @@ class MainApp extends StatelessWidget {
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
       getPages: AppPages.routes,
+      theme: ThemeManager().themeData,
       initialRoute: AppPages.INITIAL,
     );
   }
