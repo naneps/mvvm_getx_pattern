@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ThemeManager {
-  Color primaryColor = const Color.fromARGB(255, 69, 119, 225);
+  Color primaryColor = const Color.fromARGB(255, 35, 43, 61);
   Color secondaryColor = const Color.fromARGB(255, 116, 197, 255);
+  Color tertiaryColor = const Color.fromARGB(255, 255, 116, 116);
   Color backgroundColor = const Color.fromARGB(255, 252, 252, 252);
   Color textColor = const Color.fromARGB(255, 29, 29, 29);
   Color accentColor = const Color.fromARGB(255, 68, 255, 243);
@@ -109,6 +110,7 @@ class ThemeManager {
         hintStyle: TextStyle(color: hintColor),
         labelStyle: TextStyle(color: textColor),
         errorStyle: TextStyle(color: errorColor),
+        counterStyle: TextStyle(color: hintColor),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: primaryColor),
         ),
@@ -134,17 +136,34 @@ class ThemeManager {
       ),
       buttonTheme: ButtonThemeData(
         buttonColor: primaryColor,
-        textTheme: ButtonTextTheme.primary,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: primaryColor),
+            ),
+          ),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(primaryColor),
+          backgroundColor: MaterialStateProperty.all(
+            primaryColor,
+          ),
+          elevation: MaterialStateProperty.all(0),
+          fixedSize: MaterialStateProperty.all(
+            const Size(double.infinity, 40),
+          ),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(5),
+              side: BorderSide(color: primaryColor, width: 0),
             ),
           ),
         ),

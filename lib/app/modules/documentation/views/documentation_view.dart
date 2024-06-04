@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:mvvm_getx_pattern/app/commons/lang_switcher.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/buttons/x_button.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/buttons/x_icon_button.dart';
 import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_currency.dart';
-import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_password.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_date.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_media/enums.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_media/input_media.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_phone.dart';
+import 'package:mvvm_getx_pattern/app/commons/ui/inputs/input_secure.dart';
 import 'package:mvvm_getx_pattern/app/commons/ui/inputs/x_input.dart';
 import 'package:mvvm_getx_pattern/app/commons/utils/validator_form_field.dart';
 
@@ -9,19 +17,22 @@ import '../controllers/documentation_controller.dart';
 
 class DocumentationView extends GetView<DocumentationController> {
   const DocumentationView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Documentation'),
+        title: Text('Documentation'.tr),
         centerTitle: true,
+        elevation: 0,
+        actions: const [LangSwitcher()],
       ),
       body: ListView(
         shrinkWrap: true,
         children: [
           ExpansionTile(
             leading: const Icon(Icons.text_format),
-            title: const Text("Text Style"),
+            title: Text("Text Style".tr),
             dense: true,
             childrenPadding: const EdgeInsets.all(8),
             children: [
@@ -30,27 +41,32 @@ class DocumentationView extends GetView<DocumentationController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ...controller.textStyles.map(
-                    (e) => Container(
+                  ...controller.textStyles.map((e) {
+                    final index = controller.textStyles.indexOf(e);
+                    return Container(
                       width: Get.width,
                       padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        border: Border.all(),
+                        border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.grey.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Text(
-                        e.entries.first.key,
-                        textAlign: TextAlign.start,
-                        style: e.entries.first.value,
-                      ),
-                    ),
-                  ),
+                      child: Text(e.entries.first.key,
+                          textAlign:
+                              index.isEven ? TextAlign.start : TextAlign.end,
+                          style: e.entries.first.value),
+                    );
+                  }),
                 ],
               )
             ],
           ),
           ExpansionTile(
             childrenPadding: const EdgeInsets.all(8),
-            title: const Text("Text Input"),
+            title: Text("Input Text".tr),
             dense: true,
             leading: const Icon(Icons.text_fields),
             children: [
@@ -61,7 +77,15 @@ class DocumentationView extends GetView<DocumentationController> {
                     XInput(
                       label: "Full Name",
                       onChanged: (val) {},
+                      prefixIcon: const Icon(FontAwesomeIcons.addressCard),
+                      validator: (val) {
+                        return ValidatorFormField.validate(
+                          value: val!,
+                          validator: 'required',
+                        );
+                      },
                     ),
+                    const SizedBox(height: 8),
                     XInput(
                       label: "Email",
                       validator: (val) {
@@ -70,10 +94,23 @@ class DocumentationView extends GetView<DocumentationController> {
                           validator: 'required|email',
                         );
                       },
-                      prefixIcon: const Icon(Icons.email),
+                      prefixIcon: const Icon(FontAwesomeIcons.envelope),
                       onChanged: (val) {},
                       hasCounter: true,
                       maxLength: 50,
+                    ),
+                    const InputPhone(),
+                    const SizedBox(height: 8),
+                    const InputDate(
+                      label: "Date",
+                      initialValue: "2021-09-01",
+                      dateFormatType: DateFormatType.MMMdyyyy,
+                    ),
+                    const SizedBox(height: 8),
+                    const InputDate(
+                      label: "Date of Birth",
+                      datePickerType: DatePickerType.range,
+                      dateFormatType: DateFormatType.EdMMMyyyy,
                     ),
                     const SizedBox(height: 8),
                     SecureInput(
@@ -120,7 +157,85 @@ class DocumentationView extends GetView<DocumentationController> {
                 ),
               ),
             ],
-          )
+          ),
+          const ExpansionTile(
+            title: Text("Input Media"),
+            leading: Icon(FontAwesomeIcons.images),
+            dense: true,
+            childrenPadding: EdgeInsets.all(8),
+            children: [
+              InputMedia(source: SourceMedia.gallery),
+              SizedBox(height: 10),
+              InputMedia(
+                source: SourceMedia.gallery,
+                type: TypeInputMedia.multiple,
+              ),
+              SizedBox(height: 10),
+              InputMedia(
+                source: SourceMedia.gallery,
+                typeMedia: TypeMedia.media,
+                type: TypeInputMedia.multiple,
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text('Buttons'),
+            leading: const Icon(Icons.rectangle_outlined),
+            childrenPadding: const EdgeInsets.all(8),
+            dense: true,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      XButton(
+                        child: const Row(
+                          children: [
+                            Icon(Icons.add),
+                            Text('Custom Child Button'),
+                          ],
+                        ),
+                        onPressed: () {},
+                      ),
+                      const SizedBox(width: 5),
+                      XButton(
+                        text: 'Text Button',
+                        onPressed: () {},
+                      ),
+                      const SizedBox(width: 5),
+                    ],
+                  ),
+                  XButton.outline(
+                    text: 'Outlined Button',
+                    onPressed: () {},
+                    foregroundColor: Colors.red,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      XIconButton.outline(
+                        icon: Icons.remove,
+                        onPressed: () {},
+                        borderColor: Colors.red,
+                        size: 30,
+                        iconSize: 20,
+                      ),
+                      const SizedBox(width: 5),
+                      XIconButton.filled(
+                        icon: Icons.add,
+                        onPressed: () {},
+                        backgroundColor: Colors.green,
+                        size: 30,
+                        iconSize: 20,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );

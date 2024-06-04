@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mvvm_getx_pattern/app/commons/theme_manager.dart';
 
 class XInput extends StatefulWidget {
   final String label;
@@ -6,11 +8,13 @@ class XInput extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final bool? hasCounter;
+  final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
   final int? maxLines;
+  final bool obscureText;
   final TextInputType? keyboardType;
-  final Icon? prefixIcon;
-  final Icon? suffixIcon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
 
   const XInput({
     super.key,
@@ -20,9 +24,11 @@ class XInput extends StatefulWidget {
     this.onChanged,
     this.hasCounter = false,
     this.maxLength,
+    this.obscureText = false,
     this.maxLines = 1,
     this.keyboardType,
     this.prefixIcon,
+    this.inputFormatters,
     this.suffixIcon,
   });
 
@@ -48,6 +54,7 @@ class XInputState extends State<XInput> {
       controller: _controller,
       focusNode: _focusNode,
       validator: widget.validator,
+      obscureText: widget.obscureText,
       onChanged: (value) {
         if (widget.onChanged != null) {
           widget.onChanged!(value);
@@ -57,6 +64,8 @@ class XInputState extends State<XInput> {
       maxLength: widget.hasCounter == true ? widget.maxLength : null,
       maxLines: widget.maxLines,
       keyboardType: widget.keyboardType,
+      cursorColor: ThemeManager().primaryColor,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: 'Enter your ${widget.label.toLowerCase()}',

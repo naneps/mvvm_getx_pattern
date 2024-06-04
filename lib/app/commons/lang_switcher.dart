@@ -29,7 +29,7 @@ class LangSwitcherState extends State<LangSwitcher> {
       code: 'ko_KR',
       name: 'Korean',
       flag: '🇰🇷',
-    ),
+    )
   ];
 
   @override
@@ -47,11 +47,7 @@ class LangSwitcherState extends State<LangSwitcher> {
             language.code.split('_')[1],
           );
           Get.updateLocale(newLocale);
-          print('Language changed to ${newLocale.toString()}');
-          print("Get.locale: ${Get.locale.toString()}");
-          //   restartApp();
 
-          // Callback if provided
           if (widget.onLanguageChanged != null) {
             widget.onLanguageChanged!(newLocale);
           }
