@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mvvm_getx_pattern/app/commons/theme_manager.dart';
 
 class XInput extends StatefulWidget {
-  final String label;
+  final String? label;
   final String? initialValue;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -15,21 +15,27 @@ class XInput extends StatefulWidget {
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-
+  final EdgeInsets? contentPadding;
+  final FloatingLabelBehavior? floatingLabelBehavior;
+  final String? hintText;
   const XInput({
     super.key,
-    required this.label,
+    this.label,
     this.initialValue,
     this.validator,
     this.onChanged,
+    this.floatingLabelBehavior,
     this.hasCounter = false,
     this.maxLength,
     this.obscureText = false,
     this.maxLines = 1,
     this.keyboardType,
     this.prefixIcon,
+    this.hintText,
     this.inputFormatters,
     this.suffixIcon,
+    this.contentPadding =
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
   });
 
   @override
@@ -63,14 +69,19 @@ class XInputState extends State<XInput> {
       },
       maxLength: widget.hasCounter == true ? widget.maxLength : null,
       maxLines: widget.maxLines,
+      minLines: 1,
       keyboardType: widget.keyboardType,
       cursorColor: ThemeManager().primaryColor,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         labelText: widget.label,
-        hintText: 'Enter your ${widget.label.toLowerCase()}',
+        contentPadding: widget.contentPadding,
+        hintText:
+            widget.hintText ?? 'Enter your ${widget.label!.toLowerCase()}',
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon,
+        floatingLabelBehavior:
+            widget.floatingLabelBehavior ?? FloatingLabelBehavior.auto,
         counter: widget.hasCounter == true
             ? buildCounter(
                 context: context,

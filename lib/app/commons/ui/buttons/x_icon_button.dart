@@ -108,7 +108,7 @@ class XIconButton extends StatelessWidget {
       padding: padding,
       color: color ?? Colors.black,
       borderRadius: borderRadius ?? 4.0,
-      borderWidth: borderWidth ?? 2.0,
+      borderWidth: borderWidth ?? 1.0,
       borderColor: borderColor ?? Colors.black,
       iconSize: iconSize ?? 24.0,
       backgroundColor: Colors.transparent,

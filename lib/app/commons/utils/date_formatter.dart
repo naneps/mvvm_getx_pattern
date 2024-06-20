@@ -25,6 +25,14 @@ class DateFormatter {
     return _formatTimeDifference(diff, 'lagi');
   }
 
+  //   MAKE FORMATE LIKE SATURDAY 25 MAY
+  String dayMonthYear(String date) {
+    initialize();
+    final dateTime = DateTime.parse(date);
+    final format = DateFormat('EEEE dd MMMM', locale);
+    return format.format(dateTime);
+  }
+
   String ddMMMMyyyy(String date) {
     initialize();
     final dateTime = DateTime.parse(date);

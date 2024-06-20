@@ -7,8 +7,6 @@ void main() async {
   AppTranslations appTranslations = AppTranslations();
   await appTranslations.load(); // Wait for translations to be loaded
   runApp(
-    MainApp(
-      translations: appTranslations,
-    ),
+    MainApp(translations: appTranslations),
   );
 }
