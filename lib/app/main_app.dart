@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mvvm_getx_pattern/app/commons/theme_manager.dart';
-import 'package:mvvm_getx_pattern/app/modules/home/views/home_view.dart';
 import 'package:mvvm_getx_pattern/app/routes/app_pages.dart';
 import 'package:mvvm_getx_pattern/app/services/app_translation.dart';
 
@@ -18,9 +17,8 @@ class MainApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
-      home: const HomeView(),
       theme: ThemeManager().themeData,
-      //   initialRoute: AppPages.INITIAL,
+      initialRoute: AppPages.INITIAL,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeManager {
-  Color primaryColor = const Color.fromARGB(255, 74, 123, 239);
+  Color primaryColor = const Color.fromARGB(255, 35, 85, 201);
   Color secondaryColor = const Color.fromARGB(255, 116, 197, 255);
   Color tertiaryColor = const Color.fromARGB(255, 255, 116, 116);
   Color backgroundColor = const Color.fromARGB(255, 252, 252, 252);
@@ -142,11 +142,12 @@ class ThemeManager {
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
+          minimumSize: MaterialStateProperty.all(const Size(10, 10)),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(color: primaryColor),
+              borderRadius: BorderRadius.circular(5),
+              //   side: BorderSide(color: , width: 1),
             ),
           ),
         ),
