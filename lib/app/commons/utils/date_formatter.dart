@@ -29,7 +29,7 @@ class DateFormatter {
   String dayMonthYear(String date) {
     initialize();
     final dateTime = DateTime.parse(date);
-    final format = DateFormat('EEEE dd MMMM', locale);
+    final format = DateFormat('EEEE, dd MMMM yyyy', locale);
     return format.format(dateTime);
   }
 

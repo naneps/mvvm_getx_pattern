@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/views/auth_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/documentation/bindings/documentation_binding.dart';
@@ -34,6 +36,11 @@ class AppPages {
       name: _Paths.DOCUMENTATION,
       page: () => const DocumentationView(),
       binding: DocumentationBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH,
+      page: () => const AuthView(),
+      binding: AuthBinding(),
     ),
   ];
 

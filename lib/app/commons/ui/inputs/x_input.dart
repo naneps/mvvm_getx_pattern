@@ -7,15 +7,19 @@ class XInput extends StatefulWidget {
   final String? initialValue;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final void Function(String)? onSaved;
+  final void Function()? onTap;
   final bool? hasCounter;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
   final int? maxLines;
   final bool obscureText;
+  final bool? readOnly;
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final EdgeInsets? contentPadding;
+
   final FloatingLabelBehavior? floatingLabelBehavior;
   final String? hintText;
   const XInput({
@@ -27,11 +31,14 @@ class XInput extends StatefulWidget {
     this.floatingLabelBehavior,
     this.hasCounter = false,
     this.maxLength,
+    this.onSaved,
     this.obscureText = false,
     this.maxLines = 1,
+    this.readOnly = false,
     this.keyboardType,
     this.prefixIcon,
     this.hintText,
+    this.onTap,
     this.inputFormatters,
     this.suffixIcon,
     this.contentPadding =
@@ -59,8 +66,11 @@ class XInputState extends State<XInput> {
       key: _formKey,
       controller: _controller,
       focusNode: _focusNode,
+      onTap: widget.onTap,
       validator: widget.validator,
       obscureText: widget.obscureText,
+      readOnly: widget.readOnly!,
+      onSaved: (newValue) => widget.onSaved?.call(newValue ?? ''),
       onChanged: (value) {
         if (widget.onChanged != null) {
           widget.onChanged!(value);

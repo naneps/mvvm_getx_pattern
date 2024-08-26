@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class XButton extends StatelessWidget {
   final Widget? child;
@@ -35,10 +36,10 @@ class XButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
-        fixedSize: fixedSize,
+        fixedSize: fixedSize ?? Size(Get.width, 40),
         padding: padding,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
           side: borderSide ?? BorderSide.none,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,

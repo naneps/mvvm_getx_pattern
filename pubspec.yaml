@@ -20,6 +20,8 @@ dependencies:
   video_player: ^2.8.6
   material_design_icons_flutter: ^7.0.7296
   rive: ^0.13.8
+  flame: ^1.17.0
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies: 
   flutter_lints: ^3.0.0

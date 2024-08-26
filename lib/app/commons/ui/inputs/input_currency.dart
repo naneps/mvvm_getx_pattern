@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:mvvm_getx_pattern/app/commons/utils/input_currenrcy_formatter.dart';
 
 /// Enum representing different currency types.
@@ -68,6 +69,11 @@ class _InputCurrencyState extends State<InputCurrency> {
       decoration: InputDecoration(
         labelText: widget.label,
         prefixText: '${widget.currencyType.symbol} ',
+        prefixStyle: Get.textTheme.labelMedium,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
       ),
     );
   }

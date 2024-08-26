@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:mvvm_getx_pattern/app/commons/theme_manager.dart';
 
@@ -32,7 +31,8 @@ class InputDate extends StatefulWidget {
   final DateFormatType dateFormatType;
   final List<DateTime>? range;
   final DatePickerType datePickerType;
-
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   const InputDate({
     super.key,
     this.label = 'Date',
@@ -41,6 +41,8 @@ class InputDate extends StatefulWidget {
     this.initialValue,
     this.range = const [],
     this.validator,
+    this.prefixIcon,
+    this.suffixIcon,
     this.dateFormatType = DateFormatType.yyyyMMdd, // Default date format
     this.datePickerType =
         DatePickerType.single, // Default to single date picker
@@ -120,7 +122,6 @@ class _InputDateState extends State<InputDate> {
                   colorScheme: ColorScheme.light(
                     primary: ThemeManager().primaryColor,
                     onPrimary: Colors.white,
-                    onSurface: ThemeManager().primaryColor,
                   ),
                   dialogBackgroundColor: Colors.white,
                 ),
@@ -149,7 +150,8 @@ class _InputDateState extends State<InputDate> {
       },
       decoration: InputDecoration(
         labelText: widget.label,
-        suffixIcon: const Icon(FontAwesomeIcons.calendarDays),
+        suffixIcon: widget.suffixIcon,
+        prefixIcon: widget.prefixIcon,
       ),
     );
   }
