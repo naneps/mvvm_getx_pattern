@@ -33,7 +33,7 @@ class _LoadingDialogState extends State<LoadingDialog> {
       filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
       child: PopScope(
         canPop: false,
-        child: Dialog(
+        child: Dialog(  
           backgroundColor: Colors.transparent,
           child: Container(
             width: 150,
